@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="all.css" />
+		<script type="text/javascript" src="classes.js"></script>
+		<script type="text/javascript" src="functions.js"></script>
+	</head>
+	<body>
+		<header>
+		</header>
+		<main>
+			<section id="creer">
+				<aside>
+					<h2><span id="docuType">DEVIS</span><span id="docuNumber"></span></h2>
+					<h5 id="docuDate"></h5>
+					<div id="parties">
+						<div id="client"></div>
+						<div id="infosEI"> <!-- Has to be hardcoded for now -->
+							<p>Full name<br />
+							<span class="smaller">Adress<br/>
+							Adress<br/>
+							Phone #<br />
+							Email</span><br />
+							SIRET 00000000000000
+							</p>
+						</div>
+					</div>
+					<table id="items">
+						<thead>
+							<tr>
+								<th>Description</th>
+								<th>Quantité</th>
+								<th>Prix HT</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+						<tfoot>
+							<tr class="vsmaller"><td colspan="2">Charges</td><td id="HTtoTTC">0 €</td></tr>
+							<tr><th colspan="2">Total TTC</th><td id="totTTC">0 €</td></tr>
+						</tfoot>
+					</table>
+					<div id="clauses">
+						<p>Payable en 1 fois, dans un délai de 30 jours à compter de la date de la prestation.<br/>
+							Tout retard entraîne une majoration de 30% par période de 15 jours entamée.<br/>
+							TVA non applicable, art. 293 B du CGI</p>
+					</div>
+				</aside>
+				<div>
+					<h2>Créer une facture</h2>
+					<div>
+						<!-- WIP : <p class="smaller">Importer un fichier JSON : -->
+						<input type="file" accept=".json" id="importJSON" /></p><br />
+						<select id="documentType">
+							<option value="devis">Devis</option>
+							<option value="facture">Facture</option>
+						</select><br />
+						<input type="number" id="docNumber" placeholder="Numéro de facture ou devis"><br />
+						<input type="date" id="docDate" title="Date de la facture ou du devis"><br />
+						<textarea name="inputClient" placeholder="Coordonnées du client"></textarea><br />
+						<input type="button" class="button" id="send" value="Confirmer"><br />
+					</div>
+					<div>
+						<h3>Ajouter un item</h3><br />
+						<input name="addItem" type="text" placeholder="Nom item"><br />
+						<input name="addItem" type="text" placeholder="Description item"><br />
+						<input name="addItem" type="number" placeholder="Quantité item" value="1"><br />
+						<input name="addItem" id="itemDate" type="date" title="Date de la prestation"><br />
+						<input name="addItem" type="number" placeholder="Prix item"><br />
+						<input name="addItem" type="number" placeholder="Pourcentage taxes" value="22"/>
+						<small>Taxes incluses : <input type="checkbox" name="addItem"></small><br />
+						<input type="button" class="button" id="addLine" value="Ajouter" disabled>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer><a href="" id="exportDocument">Exporter le document</a> <br/>
+			<a href="" id="exportAsJSON">Exporter en JSON</a></footer>
+		<script type="text/javascript" src="handle.js"></script>
+		
+		<script type="text/javascript"> // Preload today's date in date pickers
+			var date = new Date();
+
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10) month = "0" + month;
+			if (day < 10) day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;       
+			document.getElementById("docDate").value = today;
+			document.getElementById("itemDate").value = today;
+		</script>
+	</body>
+</html>
