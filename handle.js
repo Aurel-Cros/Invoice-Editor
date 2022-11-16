@@ -19,7 +19,7 @@ document
 		// Once informations have been processed, create Facture object and enable the form to add items onto the document
 		FactureActuelle = new Facture(documentType, documentNumber, outputDate, infosClient)
 		document.getElementById('addLine').removeAttribute('disabled')
-	});
+	})
 
 //Items section
 let totalPrice = 0
@@ -32,7 +32,7 @@ document
 	{
 		const itemToAdd = new Item
 
-		let itemInfos = document.getElementsByName("addItem");
+		let itemInfos = document.getElementsByName("addItem")
 
 		itemToAdd.name = itemInfos[0].value
 		itemToAdd.description = itemInfos[1].value
@@ -43,11 +43,11 @@ document
 		let itemTaxInc = itemInfos[6].checked
 
 		if (itemTaxInc)
-			itemToAdd.uPriceHT = Math.round((itemPrice / (1 + itemTax)) * 100) / 100
+			itemToAdd.uPriceHT = Math.round((itemPrice * (1 - itemTax)) * 100) / 100
 		else
-			itemToAdd.uPriceHT = itemPrice;
+			itemToAdd.uPriceHT = itemPrice
 		
-		let newItemElement = document.createElement("tr");
+		let newItemElement = document.createElement("tr")
 		newItemElement.innerHTML = `<td class="itemDescription">
 			<p>${itemToAdd.name}<br />
 				<span class="descriptionItem">${itemToAdd.date}<br />
@@ -57,19 +57,19 @@ document
 			<td>${itemToAdd.quantity}</td>
 			<td>${itemToAdd.uPriceHT * itemToAdd.quantity}</td>`
 
-		itemsListElement.appendChild(newItemElement);
+		itemsListElement.appendChild(newItemElement)
 		totalPrice += parseInt(itemToAdd.uPriceHT * itemToAdd.quantity * 100)
-
+		let TTCPrice = Math.round((totalPrice / 100 / 0.78 + Number.EPSILON) * 100) / 100
 		document
 			.getElementById('HTtoTTC')
-			.innerHTML = Math.round((totalPrice / 100 * 0.22 + Number.EPSILON) * 100) / 100 + ' €'
+			.innerHTML = Math.round((TTCPrice * 0.22 + Number.EPSILON) * 100) / 100 + ' €'
 		document
 			.getElementById('totTTC')
-			.innerHTML = Math.round((totalPrice / 100 * 1.22 + Number.EPSILON) * 100) / 100 + ' €'
+			.innerHTML = TTCPrice + ' €'
 
 		// Add item to document
-		FactureActuelle.addItem(itemToAdd);
-	});
+		FactureActuelle.addItem(itemToAdd)
+	})
 
 // Export html document in its current state
 document
@@ -78,21 +78,21 @@ document
 	{
 		let facture = document.getElementsByTagName('aside')[0].innerHTML
 		let exportDocument = `<!DOCTYPE html>
-		<html style="display: flex;flex-flow:row nowrap;justify-content:center;">
+		<html style="display: flexflex-flow:row nowrap;justify-content:center;">
 			<head>
 			<link rel="stylesheet" href="../all.css" />
 			</head>
 			<body id="exportedDocument">
 			${facture}
 			</body>
-		</html>`;
+		</html>`
 
 		let mimeType = 'text/html'
 
 		let link = document.getElementById('exportDocument')
 		link.setAttribute('download', `${FactureActuelle.docType}${FactureActuelle.docNumber}.html`)
 		link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(exportDocument))
-	});
+	})
 
 // Export JSON file with document
 document
@@ -108,7 +108,7 @@ document
 		let linkElement = document.getElementById('exportAsJSON')
 		linkElement.setAttribute('href', dataUri)
 		linkElement.setAttribute('download', exportFileDefaultName)
-	});
+	})
 
 /* Import JSON file as new document
 // WIP
