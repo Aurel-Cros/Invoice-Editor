@@ -23,7 +23,7 @@ document
 
 //Items section
 let totalPrice = 0
-const itemsListElement = document.getElementsByTagName('tbody')[0]
+const itemsListElement = document.getElementById('tbody')
 
 // Add item on the document
 document
@@ -35,12 +35,11 @@ document
 		let itemInfos = document.getElementsByName("addItem")
 
 		itemToAdd.name = itemInfos[0].value
-		itemToAdd.description = itemInfos[1].value
+		itemToAdd.description = itemInfos[1].value.replace("\n","<br>\n")
 		itemToAdd.quantity = itemInfos[2].value
-		itemToAdd.date = dateFormat(itemInfos[3].value)
-		let itemPrice = itemInfos[4].value
-		let itemTax = itemInfos[5].value / 100
-		let itemTaxInc = itemInfos[6].checked
+		let itemPrice = itemInfos[3].value
+		let itemTax = itemInfos[4].value / 100
+		let itemTaxInc = itemInfos[5].checked
 
 		if (itemTaxInc)
 			itemToAdd.uPriceHT = Math.round((itemPrice * (1 - itemTax)) * 100) / 100
@@ -50,12 +49,11 @@ document
 		let newItemElement = document.createElement("tr")
 		newItemElement.innerHTML = `<td class="itemDescription">
 			<p>${itemToAdd.name}<br />
-				<span class="descriptionItem">${itemToAdd.date}<br />
-				${itemToAdd.description}<br />
-				Prix u : ${itemToAdd.uPriceHT}</span>
-			</p></td>
-			<td>${itemToAdd.quantity}</td>
-			<td>${itemToAdd.uPriceHT * itemToAdd.quantity}</td>`
+				<span class="descriptionItem">${descriptionSlot}
+				Prix/u TTC : ${itemPrice} €</span>
+			</p></div>
+			<div class="msmaller center">${itemToAdd.quantity}</div>
+			<div class="msmaller center">${itemToAdd.uPriceHT * itemToAdd.quantity} €</div>`
 
 		itemsListElement.appendChild(newItemElement)
 		totalPrice += parseInt(itemToAdd.uPriceHT * itemToAdd.quantity * 100)
@@ -80,7 +78,210 @@ document
 		let exportDocument = `<!DOCTYPE html>
 		<html style="display: flexflex-flow:row nowrap;justify-content:center;">
 			<head>
-			<link rel="stylesheet" href="../all.css" />
+			<style type="text/css">*
+			{
+				margin: 0;
+				padding: 0;
+			}
+			body
+			{
+				font-family: Arial, Times, 'Times New Roman', serif;
+			}
+			header
+			{
+				height: 8%;
+				vertical-align: middle;
+				margin-top: 20px;
+			}
+			header, nav, main
+			{
+				width: 100%;
+			}
+			nav ul
+			{
+				width: 100%;
+				list-style: inside;
+				margin: auto;
+				display: flex;
+				justify-content: space-evenly;
+			}
+			nav li:hover
+			{
+				cursor: pointer;
+			}
+			footer
+			{
+				position: relative;
+				bottom: 50px;
+				text-align: center;
+			}
+			
+			.button
+			{
+				margin: 5px;
+				padding: 6px;
+				border-radius: 25px;
+				border: 1px dotted black;
+				background: rgb(246, 251, 255);
+				transition: 0.3s;
+			}
+			.button:hover
+			{
+				cursor: pointer;
+				background: rgb(235, 246, 255);
+			}
+			.button:active
+			{
+				border: inset 1px;
+				background: rgb(253, 253, 253);
+			}
+			
+			#docuDate
+			{
+				font-weight: 100;
+				width: 80%;
+				margin: auto;
+				text-align: start;
+			}
+			
+			.smaller
+			{
+				font-size: 0.95em;
+			}
+			.vsmaller
+			{
+				font-size: 0.75em;
+				font-style: italic;
+				color: #454545;
+			}
+			
+			aside
+			{
+				border: 1px solid black;
+				border-radius: 5px;
+				aspect-ratio: 21/29.7;
+				width: 600px;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-between;
+				align-items: center;
+			}
+			#exportedDocument {
+				aspect-ratio: 21/29.7;
+				width: 20cm;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: space-between;
+				align-items: center;
+			}
+			aside p, #exportedDocument p
+			{
+				padding: 9px;
+			}
+			
+			section
+			{
+				width: 90%;
+				display: flex;
+				flex-direction: row-reverse;
+				justify-content: space-evenly;
+				align-items: center;
+				height: 70%;
+				margin: 11% auto;
+			}
+			section div
+			{
+				width: 45%;
+				margin: auto;
+				display: flex;
+				flex-flow: column nowrap;
+				justify-content: center;
+			}
+			section h2
+			{
+				margin: 5% auto;
+			}
+			section div div
+			{
+				width: 90%;
+			}
+			
+			#parties
+			{
+				width: 100%;
+				margin: auto;
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-between;
+				font-size: 0.85em;
+			}
+			#parties div
+			{
+				width: 49%;
+				margin: 0.5%;
+			}
+			#infosEI
+			{
+				text-align: end;
+			}
+			
+			#items
+			{
+				height: 70%;
+				width: 100%;
+			}
+			#items th
+			{
+				vertical-align: middle;
+			}
+			#items th, #items td
+			{
+				text-align: center;
+				background-color: rgba(252, 252, 252, 0.5);
+				border-radius: 20px;
+				padding: 15px;
+			}
+			tbody
+			{
+				font-size: 0.88em;
+			}
+			
+			.hide
+			{
+				visibility: hidden;
+			}
+			
+			.itemLine:hover
+			{
+				cursor: pointer;
+				background: rgba(250,150,150,0.8);
+			}
+			
+			.itemDescription
+			{
+				text-align: start !important;
+			}
+			.descriptionItem
+			{
+				color: #666;
+				font-size: 0.8em;
+			}
+			
+			#clauses
+			{
+				width: 80%;
+				color: #444;
+				font-size: 0.66em;
+			}
+			#clauses p
+			{
+				margin: 5px;
+			}
+			
+			#ouvrir
+			{
+				display: none;
+			}</style>
 			</head>
 			<body id="exportedDocument">
 			${facture}
