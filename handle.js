@@ -45,9 +45,15 @@ document
 			itemToAdd.uPriceHT = Math.round((itemPrice * (1 - itemTax)) * 100) / 100
 		else
 			itemToAdd.uPriceHT = itemPrice
-		
-		let newItemElement = document.createElement("tr")
-		newItemElement.innerHTML = `<td class="itemDescription">
+			
+		itemPrice = Math.round((itemToAdd.uPriceHT / 0.78 + Number.EPSILON) * 100) / 100
+
+		let newItemElement = document.createElement("div")
+		newItemElement.setAttribute("class", "row")
+
+		let descriptionSlot = itemToAdd.description.length > 0 ? itemToAdd.description + "<br>" : ""
+
+		newItemElement.innerHTML = `<div class="itemDescription">
 			<p>${itemToAdd.name}<br />
 				<span class="descriptionItem">${descriptionSlot}
 				Prix/u TTC : ${itemPrice} €</span>
