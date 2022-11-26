@@ -45,7 +45,7 @@ document
 			itemToAdd.uPriceHT = Math.round((itemPrice * (1 - itemTax)) * 100) / 100
 		else
 			itemToAdd.uPriceHT = itemPrice
-			
+
 		itemPrice = Math.round((itemToAdd.uPriceHT / 0.78 + Number.EPSILON) * 100) / 100
 
 		let newItemElement = document.createElement("div")
@@ -56,7 +56,7 @@ document
 		newItemElement.innerHTML = `<div class="itemDescription">
 			<p>${itemToAdd.name}<br />
 				<span class="descriptionItem">${descriptionSlot}
-				Prix/u TTC : ${itemPrice} €</span>
+				Prix unitaire TTC : ${itemPrice} €</span>
 			</p></div>
 			<div class="msmaller center">${itemToAdd.quantity}</div>
 			<div class="msmaller center">${itemToAdd.uPriceHT * itemToAdd.quantity} €</div>`
@@ -92,6 +92,7 @@ document
 			body
 			{
 				font-family: Arial, Times, 'Times New Roman', serif;
+				font-size: 11pt;
 			}
 			header
 			{
@@ -160,6 +161,21 @@ document
 				font-style: italic;
 				color: #454545;
 			}
+			.bold
+			{
+				font-weight: bold;
+			}
+			.emph
+			{
+				background: #ddd;
+				border: 1px solid black;
+				border-radius: 12px;
+				padding: 9px 0 !important;
+			}
+			.center
+			{
+				text-align: center;
+			}
 			
 			aside
 			{
@@ -212,58 +228,107 @@ document
 				width: 90%;
 			}
 			
+			#top
+			{
+				width: 100%;
+				margin: 5px auto;
+			}
 			#parties
 			{
 				width: 100%;
-				margin: auto;
+				margin: 5px auto;
 				display: flex;
 				flex-flow: row nowrap;
 				justify-content: space-between;
-				font-size: 0.85em;
+				font-size: 0.75em;
 			}
 			#parties div
 			{
 				width: 49%;
 				margin: 0.5%;
 			}
-			#infosEI
+			#client
 			{
 				text-align: end;
 			}
-			
 			#items
 			{
-				height: 70%;
-				width: 100%;
-			}
-			#items th
-			{
-				vertical-align: middle;
-			}
-			#items th, #items td
-			{
-				text-align: center;
-				background-color: rgba(252, 252, 252, 0.5);
-				border-radius: 20px;
-				padding: 15px;
-			}
-			tbody
-			{
-				font-size: 0.88em;
+				width: 95%;
+				margin: 15px auto;
 			}
 			
+			.row
+			{
+				width: 100%;
+				margin: 2px auto;
+				padding: 1px;
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: space-around;
+			}
+			.row p
+			{
+				padding: 3px;
+			}
+			.row div
+			{
+				width: auto;
+				flex: 1;
+			}
+			.row :nth-child(0n+1)
+			{
+				flex: 3;
+			}
+			.thead
+			{
+				display: flex;
+				flex-flow: column nowrap;
+				width: 95%;
+				font-weight: bold;
+				text-align: center;
+			}
+			.thead .row
+			{
+				background: #eee;
+				border: 1px solid #ddd;
+				border-radius: 15px;
+				padding: 6px 0px !important;
+			}
+			.header
+			{
+				width: auto;
+				margin: auto;
+			}
+			#tbody
+			{
+				width: 95%;
+				margin: 5px auto;
+				display: flex;
+				flex-flow: column nowrap;
+				font-size: 0.88em;
+			}
+			#tbody .row
+			{
+				background: #eee;
+				border-radius: 10px;
+				padding: 3px;
+				margin: 2px auto;
+			}
+			.tfoot
+			{
+				display: flex;
+				flex-flow: column nowrap;
+				border-top: 1px solid #eee;
+				width: 90%;
+				margin: 6px auto;
+				text-align: center;
+			}
 			.hide
 			{
 				visibility: hidden;
 			}
 			
-			.itemLine:hover
-			{
-				cursor: pointer;
-				background: rgba(250,150,150,0.8);
-			}
-			
-			.itemDescription
+			.itemDetails
 			{
 				text-align: start !important;
 			}
@@ -275,9 +340,10 @@ document
 			
 			#clauses
 			{
-				width: 80%;
+				width: 90%;
 				color: #444;
 				font-size: 0.66em;
+				margin: 5px auto;
 			}
 			#clauses p
 			{
