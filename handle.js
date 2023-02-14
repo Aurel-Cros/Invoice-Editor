@@ -46,7 +46,7 @@ document
 		else
 			itemToAdd.uPriceHT = itemPrice
 
-		itemPrice = Math.round((itemToAdd.uPriceHT / 0.78 + Number.EPSILON) * 100) / 100
+		itemPrice = Math.round((itemToAdd.uPriceHT / (1-itemTax) + Number.EPSILON) * 100) / 100
 
 		let newItemElement = document.createElement("div")
 		newItemElement.setAttribute("class", "row")
@@ -63,10 +63,10 @@ document
 
 		itemsListElement.appendChild(newItemElement)
 		totalPrice += parseInt(itemToAdd.uPriceHT * itemToAdd.quantity * 100)
-		let TTCPrice = Math.round((totalPrice / 100 / 0.78 + Number.EPSILON) * 100) / 100
+		let TTCPrice = Math.round((totalPrice / 100 / (1-itemTax) + Number.EPSILON) * 100) / 100
 		document
 			.getElementById('HTtoTTC')
-			.innerHTML = Math.round((TTCPrice * 0.22 + Number.EPSILON) * 100) / 100 + ' €'
+			.innerHTML = Math.round((TTCPrice * itemTax + Number.EPSILON) * 100) / 100 + ' €'
 		document
 			.getElementById('totTTC')
 			.innerHTML = TTCPrice + ' €'
@@ -148,6 +148,7 @@ document
 				font-weight: 100;
 				width: 80%;
 				margin: auto;
+				margin-bottom: 2cm;
 				text-align: start;
 			}
 			
@@ -190,7 +191,9 @@ document
 			}
 			#exportedDocument {
 				aspect-ratio: 21/29.7;
-				width: 20cm;
+				width: 17cm;
+				padding: 0.5cm;
+				margin: auto;
 				display: flex;
 				flex-flow: column nowrap;
 				justify-content: space-between;
@@ -233,6 +236,11 @@ document
 				width: 100%;
 				margin: 5px auto;
 			}
+			#top h2
+			{
+				text-align: center;
+				margin-bottom: 2cm;
+			}
 			#parties
 			{
 				width: 100%;
@@ -265,6 +273,7 @@ document
 				display: flex;
 				flex-flow: row nowrap;
 				justify-content: space-around;
+				align-items: center;
 			}
 			.row p
 			{
@@ -293,6 +302,7 @@ document
 				border: 1px solid #ddd;
 				border-radius: 15px;
 				padding: 6px 0px !important;
+				margin-left: 20px;
 			}
 			.header
 			{
