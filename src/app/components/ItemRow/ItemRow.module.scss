@@ -1,0 +1,63 @@
+.itemRow {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+
+    .name {
+        width: 60%;
+
+        input {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        textarea {
+            background-color: transparent;
+            width: 100%;
+        }
+    }
+
+    .price,
+    .q,
+    .tot {
+        text-align: center;
+        width: 13%;
+
+        input {
+            max-width: 40px;
+        }
+    }
+
+    .price,
+    .tot {
+        position: relative;
+
+        ::after {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    .name,
+    .price,
+    .q,
+    .tot {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
+        border: 1px solid grey;
+        border-radius: 1rem;
+        background-color: white;
+
+        input {
+            background-color: transparent;
+            border: 1px solid lightgrey;
+        }
+    }
+}
