@@ -1,34 +1,45 @@
 'use client'
 
-import { useEffect, useState } from "react"
 import theme from "@/app/theme.module.scss";
-import style from "InvoiceList.module.scss";
+import style from "./InvoiceList.module.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { nanoid } from "nanoid";
-import useLocalStorage from "../../Hooks/useLocalStorage";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import downloadObjectAsJson from "@/app/utils/downloadObjectAsJson";
 
 export default function InvoiceList() {
-    const [value, setValue] = useLocalStorage("current", [])
-    const [items, setItems] = useState(value || []);
+    const [items, setItems] = useState([]);
+
+    const updateItems = (value) => {
+        setItems(() => value)
+        localStorage.setItem('current', JSON.stringify(value));
+    }
 
     useEffect(() => {
-        setValue(items)
-    }, [items, setValue]);
+        const stored = localStorage.getItem('current');
 
+        if (stored) {
+            const newState = JSON.parse(stored);
+            if (stored.length > 0)
+                setItems(newState);
+        }
+
+    }, [setItems]);
 
     const addItem = () => {
         const newItems = [...items, {
             id: nanoid(),
             name: "",
             text: "",
-            price: "",
-            quantity: ""
+            price: 0,
+            quantity: 0
         }];
-        setItems(newItems);
+        updateItems(newItems);
     }
     const removeItem = (item) => {
         const newItems = items.filter(i => item.id != i.id);
-        setItems(newItems);
+        updateItems(newItems);
     }
     const editItem = (item) => {
         const newItems = items.map(i => {
@@ -36,15 +47,28 @@ export default function InvoiceList() {
                 return i;
             return item;
         });
-        setItems(newItems);
+        updateItems(newItems);
     }
 
     return (
         <div className={theme.flex}>
             <div className={style.invoiceList}>
-                {items.map(item => <ItemRow key={item.id} item={item} editItem={editItem}></ItemRow>)}
+                {items.map(item => <ItemRow key={item.id} item={item} editItem={editItem} removeItem={removeItem}></ItemRow>)}
             </div>
             <button onClick={addItem}>Ajouter</button>
+            <div>
+                <h4>Total</h4>
+                <p>{items.reduce((a, i) => a + i.price * i.quantity, 0)}€</p>
+            </div>
+            <button onClick={() => {
+                downloadObjectAsJson(items,
+                    "facture-" + new Date().toLocaleDateString('fr-FR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                    }).replaceAll(' ', '-'))
+            }}>Exporter en JSON</button>
+
         </div >
     )
 }

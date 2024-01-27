@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import theme from '../theme.module.scss'
+import theme from '@/app/theme.module.scss'
 import style from './Parameters.module.scss'
 
 export default function Parameters() {

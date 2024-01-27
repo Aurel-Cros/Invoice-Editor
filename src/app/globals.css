@@ -29,14 +29,26 @@ button {
 }
 
 button {
+  border: none;
+  background-color: whitesmoke;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 150ms, scale 20ms;
+
   &:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.05rem;
+    padding: auto 1rem;
+    background-color: darkblue;
+    color: white;
+    font-weight: 600;
+
+    &.close {
+      background-color: crimson;
+    }
   }
 
   &:active {
-    background-color: rgba(0, 0, 0, 0.05);
-    box-shadow: inset 2px 2px 2px black;
+    scale: 0.9;
   }
 }
 

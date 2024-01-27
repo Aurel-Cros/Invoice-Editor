@@ -1,6 +1,6 @@
-import theme from "ItemRow.module.scss";
+import theme from "./ItemRow.module.scss";
 
-export default function ItemRow({ item, editItem }) {
+export default function ItemRow({ item, editItem, removeItem }) {
     const itemTotal = item.price * item.quantity;
 
     function edit(e) {
@@ -17,13 +17,16 @@ export default function ItemRow({ item, editItem }) {
                 <textarea name="text" onInput={edit} placeholder="Description" defaultValue={item.text}></textarea>
             </div>
             <div className={theme.price}>
-                <input name="price" onInput={edit} placeholder="Prix unitaire" defaultValue={item.price}></input>
+                <input type="number" name="price" onInput={edit} placeholder="Prix unit" defaultValue={item.price}></input>
             </div>
             <div className={theme.q}>
-                <input name="quantity" onInput={edit} placeholder="Quantité" defaultValue={item.quantity}></input>
+                <input type="number" name="quantity" onInput={edit} placeholder="Quantité" defaultValue={item.quantity}></input>
             </div>
             <div className={theme.tot}>
                 <p>{itemTotal}</p>
+            </div>
+            <div className={theme.q}>
+                <button className="close" onClick={() => { removeItem(item) }}>X</button>
             </div>
         </div>
     )
