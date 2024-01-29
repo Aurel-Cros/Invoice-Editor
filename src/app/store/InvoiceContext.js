@@ -10,7 +10,9 @@ export function InvoiceProvider({ children }) {
         myInfo: {
             name: null,
             address: null,
-            contact: null
+            contact: null,
+            iban: null,
+            bic: null
         },
         clientInfo: {
             name: "",
@@ -29,12 +31,19 @@ export function InvoiceProvider({ children }) {
         const myInfo = {
             name: localStorage.getItem("my-name") || "",
             address: localStorage.getItem("my-address") || "",
-            contact: localStorage.getItem("my-contact") || ""
+            contact: localStorage.getItem("my-contact") || "",
+            iban: localStorage.getItem("my-iban") || "",
+            bic: localStorage.getItem("my-bic") || ""
         };
         const clientInfo = {
             name: localStorage.getItem("client-name") || "",
             address: localStorage.getItem("client-address") || "",
             contact: localStorage.getItem("client-contact") || ""
+        };
+        const details = {
+            name: localStorage.getItem("invoice-name") || "",
+            type: localStorage.getItem("invoice-type") || "",
+            date: localStorage.getItem("invoice-date") || ""
         };
 
         const stored = localStorage.getItem('current');
@@ -43,13 +52,12 @@ export function InvoiceProvider({ children }) {
             newItems = JSON.parse(stored);
         }
 
-        console.log(newItems, stored)
-
         setInvoice((old) => (
             {
                 ...old,
                 myInfo,
                 clientInfo,
+                details,
                 items: newItems
             })
         );

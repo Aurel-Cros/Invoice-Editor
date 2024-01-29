@@ -1,0 +1,178 @@
+#exportedDocument {
+    aspect-ratio: 21/29.7;
+    width: 21cm;
+    padding: 0.5cm;
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#exportedDocument {
+
+    p,
+    pre {
+        font-family: inherit;
+        padding: 0.56rem;
+    }
+}
+
+#top {
+    width: 100%;
+    margin: 0.3125rem auto;
+}
+
+#top h2 {
+    text-align: center;
+    margin-bottom: 1cm;
+}
+
+#docuDate {
+    font-weight: 400;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1cm;
+    text-align: start;
+}
+
+#parties {
+    width: 100%;
+    margin: 0.3125rem auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 0.85em;
+}
+
+#parties div {
+    width: 49%;
+    margin: 0.5%;
+}
+
+#client {
+    text-align: end;
+}
+
+#items {
+    width: 95%;
+    margin: 0.9375rem auto;
+}
+
+.descriptionItem {
+    color: #666;
+    font-size: 0.8em;
+}
+
+.itemDescription {
+    h5 {
+        margin: 0.5rem;
+    }
+}
+
+.row.totalFrame {
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.smaller {
+    font-size: 0.95em;
+}
+
+.vsmaller {
+    font-size: 0.75em;
+    font-style: italic;
+    color: #454545;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.emph {
+    background: #ddd;
+    border: 0.0625rem solid black;
+    border-radius: 0.5rem;
+    padding: 0.5625rem 0 !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.row {
+    width: 100%;
+    margin: 0.125rem auto;
+    padding: 0.0625rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.row p {
+    padding: 0.1875rem;
+}
+
+.row div {
+    width: auto;
+    flex: 1;
+}
+
+.row :first-child {
+    flex: 3;
+}
+
+.thead {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 95%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.thead .row {
+    background: #eee;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0.375rem 0rem !important;
+    margin-left: 1.25rem;
+}
+
+#tbody {
+    width: 95%;
+    margin: 0.3125rem auto;
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 0.88em;
+}
+
+#tbody .row {
+    background: #eee;
+    border-radius: 0.5rem;
+    padding: 0.1875rem;
+    margin: 0.125rem auto;
+}
+
+.tfoot {
+    display: flex;
+    flex-flow: column nowrap;
+    border-top: 0.0625rem solid #eee;
+    width: 90%;
+    margin: 0.375rem auto;
+    text-align: center;
+}
+
+#clauses {
+    width: 90%;
+    color: #444;
+    font-size: 0.66em;
+    margin: 0.3125rem auto;
+}
+
+#clauses p {
+    margin: 0.3125rem;
+}

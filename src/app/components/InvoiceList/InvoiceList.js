@@ -5,7 +5,6 @@ import style from "./InvoiceList.module.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { nanoid } from "nanoid";
 import { useContext } from "react";
-import downloadObjectAsJson from "@/app/utils/downloadObjectAsJson";
 import { InvoiceContext } from "@/app/store/InvoiceContext";
 
 export default function InvoiceList() {
@@ -45,20 +44,13 @@ export default function InvoiceList() {
             <div className={style.invoiceList}>
                 {items.map(item => <ItemRow key={item.id} item={item} editItem={editItem} removeItem={removeItem}></ItemRow>)}
             </div>
+
             <button onClick={addItem}>Ajouter</button>
+
             <div>
                 <h4>Total</h4>
                 <p>{items.reduce((a, i) => a + i.price * i.quantity, 0)}€</p>
             </div>
-            <button onClick={() => {
-                downloadObjectAsJson(invoice,
-                    "facture-" + new Date().toLocaleDateString('fr-FR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    }).replaceAll(' ', '-'))
-            }}>Exporter en JSON</button>
-
-        </div >
+        </div>
     )
 }

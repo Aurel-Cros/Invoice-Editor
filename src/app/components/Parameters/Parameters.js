@@ -30,6 +30,7 @@ export default function Parameters() {
     }
 
     function saveInvoiceDetails(e) {
+        localStorage.setItem("invoice-" + e.target.name, e.target.value)
         setInvoice((old) => {
             const newInvoice = { ...old };
             newInvoice.details[e.target.name] = e.target.value;
@@ -51,6 +52,12 @@ export default function Parameters() {
                 </label>
                 <label>
                     Contact, SIRET, etc. : <textarea onInput={saveMyInfo} autoComplete="off" name="contact" rows="4" value={invoice.myInfo.contact}></textarea>
+                </label>
+                <label>
+                    IBAN : <input onInput={saveMyInfo} name="iban" autoComplete="off" type="text" value={invoice.myInfo.iban}></input>
+                </label>
+                <label>
+                    BIC : <input onInput={saveMyInfo} name="bic" autoComplete="off" type="text" value={invoice.myInfo.bic}></input>
                 </label>
             </div>
             <hr className={theme.margin}></hr>
