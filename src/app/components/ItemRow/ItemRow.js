@@ -17,16 +17,21 @@ export default function ItemRow({ item, editItem, removeItem }) {
                 <textarea name="text" onInput={edit} placeholder="Description" defaultValue={item.text}></textarea>
             </div>
             <div className={theme.price}>
-                <input type="number" name="price" onInput={edit} placeholder="Prix unit" defaultValue={item.price}></input>
+                <label>Prix unit
+                    <input type="number" name="price" onInput={edit} placeholder="Prix unit" defaultValue={item.price}></input>
+                </label>
             </div>
             <div className={theme.q}>
-                <input type="number" name="quantity" onInput={edit} placeholder="Quantité" defaultValue={item.quantity}></input>
+                <label>Quantité
+                    <input type="number" name="quantity" onInput={edit} placeholder="Quantité" defaultValue={item.quantity}></input>
+                </label>
             </div>
             <div className={theme.tot}>
+                <p>Total item</p>
                 <p>{itemTotal}</p>
             </div>
-            <div className={theme.q}>
-                <button className="close" onClick={() => { removeItem(item) }}>X</button>
+            <div className={theme.close}>
+                <button className="closeBtn" onClick={() => { removeItem(item) }}>X</button>
             </div>
         </div>
     )

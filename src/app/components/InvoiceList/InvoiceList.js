@@ -43,11 +43,9 @@ export default function InvoiceList() {
         <div className={theme.flex}>
             <div className={style.invoiceList}>
                 {items.map(item => <ItemRow key={item.id} item={item} editItem={editItem} removeItem={removeItem}></ItemRow>)}
+                <button className="addBtn" onClick={addItem}>Ajouter</button>
             </div>
-
-            <button onClick={addItem}>Ajouter</button>
-
-            <div>
+            <div className={style.invoiceTotal}>
                 <h4>Total</h4>
                 <p>{items.reduce((a, i) => a + i.price * i.quantity, 0)}€</p>
             </div>

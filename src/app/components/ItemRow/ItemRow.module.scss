@@ -1,19 +1,21 @@
 .itemRow {
+    position: relative;
     display: flex;
     gap: 1rem;
     justify-content: space-between;
     width: 100%;
     border: 1px solid rgba(black, 0.05);
     padding: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     box-shadow: 3px 3px 4px rgba(black, 0.1);
+    background-image: linear-gradient(to bottom, transparent, rgba(black, 0.01));
 
     .name {
         width: 60%;
 
         input {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-weight: 500;
             width: 100%;
         }
 
@@ -30,21 +32,35 @@
         text-align: center;
         width: 13%;
 
-        input {
+        label {
             max-width: 80%;
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+
+    .price,
+    .q {
+        input {
+            font-size: 0.9em;
         }
     }
 
     .price,
     .tot {
-        position: relative;
+        label>input {
+            position: relative;
 
-        &::after {
-            content: "€";
-            position: absolute;
-            right: -0.5rem;
-            top: 50%;
-            transform: translateY(-50%);
+            &::after {
+                z-index: 1;
+                content: "€";
+                position: absolute;
+                right: -0.5rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
     }
 
@@ -66,6 +82,43 @@
 
         &:not(.name) {
             align-items: center;
+        }
+    }
+
+    .close {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: calc(100% + 0.5rem);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .itemRow {
+        padding: 1rem 1rem;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 0;
+        gap: 0;
+        font-size: 0.8rem;
+
+        >div:is(.q, .price, .tot) {
+            margin: 0.5rem;
+            flex-grow: 1;
+
+        }
+
+        .name {
+            flex-basis: 100%;
+            width: 100%;
+        }
+
+        .close {
+            top: auto;
+            left: auto;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            transform: none;
         }
     }
 }
