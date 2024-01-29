@@ -13,7 +13,7 @@ export default function ItemRow({ item, editItem, removeItem }) {
     return (
         <div className={theme.itemRow}>
             <div className={theme.name}>
-                <input name="name" onInput={edit} placeholder="Nom de l'item" defaultValue={item.name}></input>
+                <input name="name" autoComplete="off" onInput={edit} placeholder="Nom de l'item" defaultValue={item.name}></input>
                 <textarea name="text" onInput={edit} placeholder="Description" defaultValue={item.text}></textarea>
             </div>
             <div className={theme.price}>

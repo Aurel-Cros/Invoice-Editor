@@ -18,7 +18,7 @@ export function InvoiceProvider({ children }) {
             contact: ""
         },
         details: {
-            type: "",
+            type: "Facture",
             name: "",
             date: `${now.getFullYear()}-${(now.getMonth() < 9 ? "0" : "") + (now.getMonth() + 1)}-${now.getDate()}`
         },
@@ -26,10 +26,15 @@ export function InvoiceProvider({ children }) {
     });
 
     useEffect(() => {
-        const newInfo = {
+        const myInfo = {
             name: localStorage.getItem("my-name") || "",
             address: localStorage.getItem("my-address") || "",
             contact: localStorage.getItem("my-contact") || ""
+        };
+        const clientInfo = {
+            name: localStorage.getItem("client-name") || "",
+            address: localStorage.getItem("client-address") || "",
+            contact: localStorage.getItem("client-contact") || ""
         };
 
         const stored = localStorage.getItem('current');
@@ -41,7 +46,12 @@ export function InvoiceProvider({ children }) {
         console.log(newItems, stored)
 
         setInvoice((old) => (
-            { ...old, myInfo: newInfo, items: newItems })
+            {
+                ...old,
+                myInfo,
+                clientInfo,
+                items: newItems
+            })
         );
     }, [setInvoice]);
 

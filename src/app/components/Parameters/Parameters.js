@@ -21,6 +21,7 @@ export default function Parameters() {
     }
 
     function saveClientInfo(e) {
+        localStorage.setItem("client-" + e.target.name, e.target.value)
         setInvoice((old) => {
             const newInvoice = { ...old };
             newInvoice.clientInfo[e.target.name] = e.target.value;
@@ -43,42 +44,42 @@ export default function Parameters() {
             <div className={style.formFlex}>
                 <h3>Vous</h3>
                 <label>
-                    Nom : <input onInput={saveMyInfo} name="name" type="text" value={invoice.myInfo.name}></input>
+                    Nom : <input onInput={saveMyInfo} name="name" autoComplete="name" type="text" value={invoice.myInfo.name}></input>
                 </label>
                 <label>
-                    Adresse : <textarea onInput={saveMyInfo} name="address" rows="4" value={invoice.myInfo.address}></textarea>
+                    Adresse : <textarea onInput={saveMyInfo} name="address" autoComplete="street-address" rows="4" value={invoice.myInfo.address}></textarea>
                 </label>
                 <label>
-                    Contact, SIRET, etc. : <textarea onInput={saveMyInfo} name="contact" rows="4" value={invoice.myInfo.contact}></textarea>
+                    Contact, SIRET, etc. : <textarea onInput={saveMyInfo} autoComplete="off" name="contact" rows="4" value={invoice.myInfo.contact}></textarea>
                 </label>
             </div>
             <hr className={theme.margin}></hr>
             <div className={style.formFlex}>
                 <h3>Votre client</h3>
                 <label>
-                    Nom : <input onInput={saveClientInfo} name="name" type="text" value={invoice.clientInfo.name}></input>
+                    Nom : <input onInput={saveClientInfo} autoComplete="off" name="name" type="text" value={invoice.clientInfo.name}></input>
                 </label>
                 <label>
-                    Adresse : <textarea onInput={saveClientInfo} name="address" rows="4" value={invoice.clientInfo.address}></textarea>
+                    Adresse : <textarea onInput={saveClientInfo} autoComplete="off" name="address" rows="4" value={invoice.clientInfo.address}></textarea>
                 </label>
                 <label>
-                    Contact, SIRET, etc. : <textarea onInput={saveClientInfo} name="contact" rows="4" type="text" value={invoice.clientInfo.contact}></textarea>
+                    Contact, SIRET, etc. : <textarea onInput={saveClientInfo} autoComplete="off" name="contact" rows="4" type="text" value={invoice.clientInfo.contact}></textarea>
                 </label>
             </div>
             <hr className={theme.margin}></hr>
             <div className={style.formFlex}>
                 <h3>Document</h3>
                 <label>
-                    Type : <select onChange={saveInvoiceDetails} value={invoice.details.type} name="type">
+                    Type : <select onChange={saveInvoiceDetails} autoComplete="off" value={invoice.details.type} name="type">
                         <option>Devis</option>
                         <option>Facture</option>
                     </select>
                 </label>
                 <label>
-                    Nom : <input onInput={saveInvoiceDetails} value={invoice.details.name} name="name" type="text"></input>
+                    Nom : <input onInput={saveInvoiceDetails} autoComplete="off" value={invoice.details.name} name="name" type="text"></input>
                 </label>
                 <label>
-                    Date : <input onInput={saveInvoiceDetails} value={invoice.details.date} name="date" type="date"></input>
+                    Date : <input onInput={saveInvoiceDetails} autoComplete="off" value={invoice.details.date} name="date" type="date"></input>
                 </label>
             </div>
             <button onClick={() => { setShow(false) }}>Fermer</button>

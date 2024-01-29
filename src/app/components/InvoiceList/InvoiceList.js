@@ -51,7 +51,7 @@ export default function InvoiceList() {
                 <p>{items.reduce((a, i) => a + i.price * i.quantity, 0)}€</p>
             </div>
             <button onClick={() => {
-                downloadObjectAsJson(items,
+                downloadObjectAsJson(invoice,
                     "facture-" + new Date().toLocaleDateString('fr-FR', {
                         year: 'numeric',
                         month: 'long',
