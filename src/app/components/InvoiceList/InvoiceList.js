@@ -4,28 +4,18 @@ import theme from "@/app/theme.module.scss";
 import style from "./InvoiceList.module.scss";
 import ItemRow from "../ItemRow/ItemRow";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useContext } from "react";
 import downloadObjectAsJson from "@/app/utils/downloadObjectAsJson";
+import { InvoiceContext } from "@/app/store/InvoiceContext";
 
 export default function InvoiceList() {
-    const [items, setItems] = useState([]);
+    const { invoice, setInvoice } = useContext(InvoiceContext);
+    const items = invoice.items;
 
     const updateItems = (value) => {
-        setItems(() => value)
         localStorage.setItem('current', JSON.stringify(value));
+        setInvoice((old) => ({ ...old, items: value }));
     }
-
-    useEffect(() => {
-        const stored = localStorage.getItem('current');
-
-        if (stored) {
-            const newState = JSON.parse(stored);
-            if (stored.length > 0)
-                setItems(newState);
-        }
-
-    }, [setItems]);
 
     const addItem = () => {
         const newItems = [...items, {

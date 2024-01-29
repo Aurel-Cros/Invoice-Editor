@@ -1,30 +1,39 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import theme from '@/app/theme.module.scss'
 import style from './Parameters.module.scss'
+import { InvoiceContext } from '@/app/store/InvoiceContext'
 
 export default function Parameters() {
-    const [info, setInfo] = useState({});
 
-    useEffect(() => {
-        const newInfo = {
-            name: localStorage.getItem("name") || "",
-            address: localStorage.getItem("address") || "",
-            contact: localStorage.getItem("contact") || ""
-        };
-        setInfo(newInfo);
-    }, []);
+    const { invoice, setInvoice } = useContext(InvoiceContext);
 
-    function saveInfo(e) {
+    function saveMyInfo(e) {
 
-        localStorage.setItem(e.target.id, e.target.value);
-        const newInfo = {
-            ...info
-        }
-        newInfo[e.target.id] = e.target.value;
-        setInfo(newInfo);
+        localStorage.setItem("my-" + e.target.name, e.target.value)
+        setInvoice((old) => {
+            const newInvoice = { ...old };
+            newInvoice.myInfo[e.target.name] = e.target.value;
+            return newInvoice;
+        });
+    }
+
+    function saveClientInfo(e) {
+        setInvoice((old) => {
+            const newInvoice = { ...old };
+            newInvoice.clientInfo[e.target.name] = e.target.value;
+            return newInvoice;
+        });
+    }
+
+    function saveInvoiceDetails(e) {
+        setInvoice((old) => {
+            const newInvoice = { ...old };
+            newInvoice.details[e.target.name] = e.target.value;
+            return newInvoice;
+        });
     }
 
     const [show, setShow] = useState(false);
@@ -34,26 +43,42 @@ export default function Parameters() {
             <div className={style.formFlex}>
                 <h3>Vous</h3>
                 <label>
-                    Nom : <input onInput={saveInfo} id="name" type="text" value={info.name}></input>
+                    Nom : <input onInput={saveMyInfo} name="name" type="text" value={invoice.myInfo.name}></input>
                 </label>
                 <label>
-                    Adresse : <textarea onInput={saveInfo} id="address" rows="6" value={info.address}></textarea>
+                    Adresse : <textarea onInput={saveMyInfo} name="address" rows="4" value={invoice.myInfo.address}></textarea>
                 </label>
                 <label>
-                    Contact, SIRET, etc. : <textarea onInput={saveInfo} id="contact" rows="2" value={info.contact}></textarea>
+                    Contact, SIRET, etc. : <textarea onInput={saveMyInfo} name="contact" rows="4" value={invoice.myInfo.contact}></textarea>
                 </label>
             </div>
             <hr className={theme.margin}></hr>
             <div className={style.formFlex}>
                 <h3>Votre client</h3>
                 <label>
-                    Nom : <input type="text"></input>
+                    Nom : <input onInput={saveClientInfo} name="name" type="text" value={invoice.clientInfo.name}></input>
                 </label>
                 <label>
-                    Adresse : <textarea rows="6"></textarea>
+                    Adresse : <textarea onInput={saveClientInfo} name="address" rows="4" value={invoice.clientInfo.address}></textarea>
                 </label>
                 <label>
-                    Contact, SIRET, etc. : <input type="text"></input>
+                    Contact, SIRET, etc. : <textarea onInput={saveClientInfo} name="contact" rows="4" type="text" value={invoice.clientInfo.contact}></textarea>
+                </label>
+            </div>
+            <hr className={theme.margin}></hr>
+            <div className={style.formFlex}>
+                <h3>Document</h3>
+                <label>
+                    Type : <select onChange={saveInvoiceDetails} value={invoice.details.type} name="type">
+                        <option>Devis</option>
+                        <option>Facture</option>
+                    </select>
+                </label>
+                <label>
+                    Nom : <input onInput={saveInvoiceDetails} value={invoice.details.name} name="name" type="text"></input>
+                </label>
+                <label>
+                    Date : <input onInput={saveInvoiceDetails} value={invoice.details.date} name="date" type="date"></input>
                 </label>
             </div>
             <button onClick={() => { setShow(false) }}>Fermer</button>
