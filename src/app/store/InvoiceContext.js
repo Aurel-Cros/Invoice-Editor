@@ -22,11 +22,9 @@ export function InvoiceProvider({ children }) {
         details: {
             type: "Facture",
             name: "",
+            legal: ``,
             date: `${now.getFullYear()}-${(now.getMonth() < 9 ? "0" : "") + (now.getMonth() + 1)}-${now.getDate()}`
         },
-        legal: `Payable en 1 fois, dans un délai de 5 jours ouvrés à compter de la date indiquée en haut du  présent document.
-Tout retard de paiement entraîne une pénalité de 15% par jour, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40 euros, conformément aux articles L441-10 et D441-5 du Code du Commerce.
-TVA non applicable, article 293 B du Code Générale des Impôts.`,
         items: []
     });
 
@@ -46,7 +44,11 @@ TVA non applicable, article 293 B du Code Générale des Impôts.`,
         const details = {
             name: localStorage.getItem("invoice-name") || "",
             type: localStorage.getItem("invoice-type") || "",
-            date: localStorage.getItem("invoice-date") || ""
+            date: localStorage.getItem("invoice-date") || "",
+            legal: localStorage.getItem("invoice-legal") ||
+                `Payable en 1 fois, dans un délai de 5 jours ouvrés à compter de la date indiquée en haut du  présent document.
+    Tout retard de paiement entraîne une pénalité de 15% par jour, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40 euros, conformément aux articles L441-10 et D441-5 du Code du Commerce.
+    TVA non applicable, article 293 B du Code Générale des Impôts.`
         };
 
         const stored = localStorage.getItem('current');
@@ -54,6 +56,7 @@ TVA non applicable, article 293 B du Code Générale des Impôts.`,
         if (stored) {
             newItems = JSON.parse(stored);
         }
+
 
         setInvoice((old) => (
             {

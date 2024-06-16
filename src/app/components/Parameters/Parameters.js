@@ -90,7 +90,7 @@ export default function Parameters() {
                 </label>
                 <label>
                     Mentions légales :
-                    <textarea onInput={saveInvoiceDetails} autoComplete="off" name="legal" rows="8" value={invoice.legal}></textarea>
+                    <textarea onInput={saveInvoiceDetails} autoComplete="off" name="legal" rows="8" value={invoice.details.legal}></textarea>
                 </label>
             </div>
             <button onClick={() => { setShow(false) }}>Fermer</button>
