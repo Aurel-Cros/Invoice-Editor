@@ -57,7 +57,7 @@ export default function InvoiceDocument() {
         </div>
         <div id={style.clauses}>
             <p>
-                {invoice.legal.split(/(?:\r\n|\n\r|\r|\n)/g).map((a, i) => <Fragment key={i}>{a}<br /></Fragment>)}
+                {invoice.details.legal.split(/(?:\r\n|\n\r|\r|\n)/g).map((a, i) => <Fragment key={i}>{a}<br /></Fragment>)}
             </p>
             <p>
                 IBAN : {invoice.myInfo.iban}<br />
