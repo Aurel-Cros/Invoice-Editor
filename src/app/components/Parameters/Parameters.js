@@ -88,6 +88,10 @@ export default function Parameters() {
                 <label>
                     Date : <input onInput={saveInvoiceDetails} autoComplete="off" value={invoice.details.date} name="date" type="date"></input>
                 </label>
+                <label>
+                    Mentions légales :
+                    <textarea onInput={saveInvoiceDetails} autoComplete="off" name="legal" rows="8" value={invoice.legal}></textarea>
+                </label>
             </div>
             <button onClick={() => { setShow(false) }}>Fermer</button>
         </div>

@@ -1,7 +1,4 @@
 .params {
-    position: absolute;
-    bottom: 2rem;
-
     box-shadow: 2px 2px 8px lightgray;
     padding: 2rem;
     border-radius: 1rem;
@@ -14,7 +11,7 @@
 }
 
 .formFlex {
-    min-width: min(600px, 100vw);
+    min-width: min(800px, 100vw);
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;

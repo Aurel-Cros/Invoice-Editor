@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import style from './invoice.module.scss';
 import { InvoiceContext } from '../store/InvoiceContext';
 
@@ -12,7 +12,7 @@ export default function InvoiceDocument() {
     return <div id={style.exportedDocument}>
         <div id={style.top}>
             <div>
-                <h2>{invoice.details.type.toUpperCase()}</h2>
+                <h2>{invoice.details.type.toUpperCase()} {invoice.details.name}</h2>
             </div>
             <h3 id={style.docuDate}>{date.toLocaleDateString()}</h3>
             <div id={style.parties}>
@@ -56,7 +56,9 @@ export default function InvoiceDocument() {
             </div>
         </div>
         <div id={style.clauses}>
-            <p>Payable en 1 fois, dans un délai de 30 jours à compter de la date indiquée en haut du présent document.<br /> Tout retard entraîne une majoration de 30% par période de 15 jours entamée.<br /> TVA non applicable, art. 293 B du CGI</p>
+            <p>
+                {invoice.legal.split(/(?:\r\n|\n\r|\r|\n)/g).map((a, i) => <Fragment key={i}>{a}<br /></Fragment>)}
+            </p>
             <p>
                 IBAN : {invoice.myInfo.iban}<br />
                 BIC : {invoice.myInfo.bic}
