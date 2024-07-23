@@ -33,7 +33,7 @@ export default function InvoiceDocument() {
                 <div className={style.row}>
                     <div className={style.header}>Description</div>
                     <div className={style.header}>Quantité</div>
-                    <div className={style.header}>Prix TTC</div>
+                    <div className={style.header}>Prix HT</div>
                 </div>
             </div>
             <div id={style.tbody}>
@@ -44,7 +44,7 @@ export default function InvoiceDocument() {
                             <p className={style.descriptionItem}>{item.text}</p>
                         </div>
                         <div className={style.center}>{item.quantity}</div>
-                        <div className={style.center}>{item.price * item.quantity}</div>
+                        <div className={style.center}>{item.price * item.quantity} €</div>
                     </div>
                 )}
             </div>
@@ -55,7 +55,7 @@ export default function InvoiceDocument() {
                 <div id={style.totTTC}>{invoice.items.reduce((acc, item) => acc + item.price * item.quantity, 0)} €</div>
             </div>
         </div>
-        <div id={style.clauses}>
+        {invoice.details.legalDisplay && <div id={style.clauses}>
             <p>
                 {invoice.details.legal.split(/(?:\r\n|\n\r|\r|\n)/g).map((a, i) => <Fragment key={i}>{a}<br /></Fragment>)}
             </p>
@@ -63,6 +63,6 @@ export default function InvoiceDocument() {
                 IBAN : {invoice.myInfo.iban}<br />
                 BIC : {invoice.myInfo.bic}
             </p>
-        </div>
+        </div>}
     </div>
 }

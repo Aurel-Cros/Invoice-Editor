@@ -38,6 +38,16 @@ export default function Parameters() {
         });
     }
 
+    function switchLegalDisplay(e) {
+        localStorage.setItem("invoice-legalDisplay", e.target.checked)
+        setInvoice((old) => {
+            const newInvoice = { ...old };
+            newInvoice.details.legalDisplay = e.target.checked;
+            console.log(newInvoice.details.legalDisplay)
+            return newInvoice;
+        });
+    }
+
     const [show, setShow] = useState(false);
 
     return show ?
@@ -91,6 +101,9 @@ export default function Parameters() {
                 <label>
                     Mentions légales :
                     <textarea onInput={saveInvoiceDetails} autoComplete="off" name="legal" rows="8" value={invoice.details.legal}></textarea>
+                </label>
+                <label>
+                    Afficher mentions <input onChange={switchLegalDisplay} type="checkbox" name="legalDisplay" checked={invoice.details.legalDisplay}></input>
                 </label>
             </div>
             <button onClick={() => { setShow(false) }}>Fermer</button>

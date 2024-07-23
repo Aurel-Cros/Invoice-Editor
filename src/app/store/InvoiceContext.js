@@ -23,6 +23,7 @@ export function InvoiceProvider({ children }) {
             type: "Facture",
             name: "",
             legal: ``,
+            legalDisplay: '',
             date: `${now.getFullYear()}-${(now.getMonth() < 9 ? "0" : "") + (now.getMonth() + 1)}-${now.getDate()}`
         },
         items: []
@@ -45,6 +46,7 @@ export function InvoiceProvider({ children }) {
             name: localStorage.getItem("invoice-name") || "",
             type: localStorage.getItem("invoice-type") || "",
             date: localStorage.getItem("invoice-date") || "",
+            legalDisplay: true,
             legal: localStorage.getItem("invoice-legal") ||
                 `Payable en 1 fois, dans un délai de 5 jours ouvrés à compter de la date indiquée en haut du  présent document.
     Tout retard de paiement entraîne une pénalité de 15% par jour, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40 euros, conformément aux articles L441-10 et D441-5 du Code du Commerce.
