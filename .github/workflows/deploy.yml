@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.HOST_FTP_USER }}
         password: ${{ secrets.HOST_FTP_PW }}
         local-dir: ./out/
-        server-dir: ./www/invoice/
+        server-dir: ./apps/invoice/
         exclude: |
           **/.git*
           **/.git*/**
